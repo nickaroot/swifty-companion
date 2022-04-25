@@ -1,0 +1,14 @@
+.DS_Store
+fastlane/README.md
+fastlane/report.xml
+fastlane/test_output/*
+fastlane/fastlanematch
+*.lock
+*.dSYM
+*.dSYM.zip
+*.ipa
+/.build
+/Packages
+xcuserdata/
+DerivedData/
+.swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata

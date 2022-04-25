@@ -1,0 +1,79 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Alamofire",
+        "repositoryURL": "https://github.com/Alamofire/Alamofire.git",
+        "state": {
+          "branch": null,
+          "revision": "f82c23a8a7ef8dc1a49a8bfc6a96883e79121864",
+          "version": "5.5.0"
+        }
+      },
+      {
+        "package": "libwebp",
+        "repositoryURL": "https://github.com/SDWebImage/libwebp-Xcode",
+        "state": {
+          "branch": null,
+          "revision": "2b3b43faaef54d1b897482428428357b7f7cd08b",
+          "version": "1.2.1"
+        }
+      },
+      {
+        "package": "NeedleFoundation",
+        "repositoryURL": "https://github.com/uber/needle",
+        "state": {
+          "branch": "master",
+          "revision": "847fd0f38e76a041d4d9ca1c931db334021e3525",
+          "version": null
+        }
+      },
+      {
+        "package": "PINCache",
+        "repositoryURL": "https://github.com/pinterest/PINCache.git",
+        "state": {
+          "branch": null,
+          "revision": "875c654984fb52b47ca65ae70d24852b0003ccd9",
+          "version": "3.0.3"
+        }
+      },
+      {
+        "package": "PINOperation",
+        "repositoryURL": "https://github.com/pinterest/PINOperation.git",
+        "state": {
+          "branch": null,
+          "revision": "44d8ca154a4e75a028a5548c31ff3a53b90cef15",
+          "version": "1.2.1"
+        }
+      },
+      {
+        "package": "PINRemoteImage",
+        "repositoryURL": "https://github.com/pinterest/PINRemoteImage.git",
+        "state": {
+          "branch": "master",
+          "revision": "18637e4414d77fbc95cd7d499179a9880e9a78d8",
+          "version": null
+        }
+      },
+      {
+        "package": "Texture",
+        "repositoryURL": "https://github.com/nickaroot/Texture.git",
+        "state": {
+          "branch": "spm",
+          "revision": "56a1249e60d55afec7011e1f9a0ac229c49cd707",
+          "version": null
+        }
+      },
+      {
+        "package": "TextureUI",
+        "repositoryURL": "https://github.com/nickaroot/TextureUI.git",
+        "state": {
+          "branch": "master",
+          "revision": "53c033ad8603ccb57ece69b32a913d48e5860c91",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}

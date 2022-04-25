@@ -1,0 +1,8 @@
+xcassets:
+  inputs:
+    - ./
+  outputs:
+    - templateName: swift5
+      output: ./WishAssets.swift
+      params:
+        publicAccess: 1
