@@ -1,4 +1,4 @@
 module UIKitRuntimeUtils {
-    umbrella "/Users/nickaroot/Xcode/SwiftyCompanion/Targets/UIKitRuntimeUtils/Sources/UIKitRuntimeUtils/include"
+    umbrella "/private/tmp/swifty-companion/Targets/UIKitRuntimeUtils/Sources/UIKitRuntimeUtils/include"
     export *
 }

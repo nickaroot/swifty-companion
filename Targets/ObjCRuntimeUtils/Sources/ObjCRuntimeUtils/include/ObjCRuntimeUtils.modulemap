@@ -1,4 +1,4 @@
 module ObjCRuntimeUtils {
-    umbrella "/Users/nickaroot/Xcode/SwiftyCompanion/Targets/ObjCRuntimeUtils/Sources/ObjCRuntimeUtils/include"
+    umbrella "/private/tmp/swifty-companion/Targets/ObjCRuntimeUtils/Sources/ObjCRuntimeUtils/include"
     export *
 }

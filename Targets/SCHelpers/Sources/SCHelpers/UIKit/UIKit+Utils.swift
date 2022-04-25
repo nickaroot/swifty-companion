@@ -43,7 +43,7 @@ public func dumpViews(_ view: UIView) {
     dumpViews(view, indent: "")
 }
 
-private func dumpViews(_ view: UIView, indent: String = "") {
+fileprivate func dumpViews(_ view: UIView, indent: String = "") {
     print("\(indent)\(view)")
     let nextIndent = indent + "-"
     for subview in view.subviews {
@@ -55,7 +55,7 @@ public func dumpLayers(_ layer: CALayer) {
     dumpLayers(layer, indent: "")
 }
 
-private func dumpLayers(_ layer: CALayer, indent: String = "") {
+fileprivate func dumpLayers(_ layer: CALayer, indent: String = "") {
     print("\(indent)\(layer)(frame: \(layer.frame), bounds: \(layer.bounds))")
     if layer.sublayers != nil {
         let nextIndent = indent + ".."
@@ -120,14 +120,13 @@ extension UIColor {
             scanner.scanLocation = 1
         }
         var value: UInt32 = 0
-        if scanner.scanHexInt32(&value) {
-            if hexString.count > 7 {
-                self.init(argb: value)
-            } else {
-                self.init(rgb: value)
-            }
-        } else {
+        guard scanner.scanHexInt32(&value) else {
             return nil
+        }
+        if hexString.count > 7 {
+            self.init(argb: value)
+        } else {
+            self.init(rgb: value)
         }
     }
 
@@ -166,11 +165,10 @@ extension UIColor {
         var hue: CGFloat = 0.0
         var saturation: CGFloat = 0.0
         var brightness: CGFloat = 0.0
-        if self.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: nil) {
-            return (hue, saturation, brightness)
-        } else {
+        guard self.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: nil) else {
             return (0.0, 0.0, 0.0)
         }
+        return (hue, saturation, brightness)
     }
 
     public var lightness: CGFloat {
@@ -293,18 +291,18 @@ extension UIColor {
         var b2: CGFloat = 0.0
         var a1: CGFloat = 0.0
         var a2: CGFloat = 0.0
-        if self.getRed(&r1, green: &g1, blue: &b1, alpha: &a1)
-            && color.getRed(&r2, green: &g2, blue: &b2, alpha: &a2)
-        {
-            let r: CGFloat = CGFloat(r1 + (r2 - r1) * f)
-            let g: CGFloat = CGFloat(g1 + (g2 - g1) * f)
-            let b: CGFloat = CGFloat(b1 + (b2 - b1) * f)
-            let a: CGFloat = CGFloat(a1 + (a2 - a1) * f)
-
-            return UIColor(red: r, green: g, blue: b, alpha: a)
-        } else {
+        guard
+            self.getRed(&r1, green: &g1, blue: &b1, alpha: &a1)
+                && color.getRed(&r2, green: &g2, blue: &b2, alpha: &a2)
+        else {
             return self
         }
+        let r: CGFloat = CGFloat(r1 + (r2 - r1) * f)
+        let g: CGFloat = CGFloat(g1 + (g2 - g1) * f)
+        let b: CGFloat = CGFloat(b1 + (b2 - b1) * f)
+        let a: CGFloat = CGFloat(a1 + (a2 - a1) * f)
+
+        return UIColor(red: r, green: g, blue: b, alpha: a)
     }
 
     private var colorComponents: (r: Int32, g: Int32, b: Int32) {
@@ -464,7 +462,7 @@ extension UIImage {
     }
 }
 
-private func makeSubtreeSnapshot(layer: CALayer, keepTransform: Bool = false) -> UIView? {
+fileprivate func makeSubtreeSnapshot(layer: CALayer, keepTransform: Bool = false) -> UIView? {
     if layer is AVSampleBufferDisplayLayer {
         return nil
     }
@@ -499,25 +497,24 @@ private func makeSubtreeSnapshot(layer: CALayer, keepTransform: Bool = false) ->
     if let sublayers = layer.sublayers {
         for sublayer in sublayers {
             let subtree = makeSubtreeSnapshot(layer: sublayer, keepTransform: keepTransform)
-            if let subtree = subtree {
-                if keepTransform {
-                    subtree.layer.transform = sublayer.transform
-                }
-                subtree.frame = sublayer.frame
-                subtree.bounds = sublayer.bounds
-                if let maskLayer = subtree.layer.mask {
-                    maskLayer.frame = sublayer.bounds
-                }
-                view.addSubview(subtree)
-            } else {
+            guard let subtree = subtree else {
                 continue
             }
+            if keepTransform {
+                subtree.layer.transform = sublayer.transform
+            }
+            subtree.frame = sublayer.frame
+            subtree.bounds = sublayer.bounds
+            if let maskLayer = subtree.layer.mask {
+                maskLayer.frame = sublayer.bounds
+            }
+            view.addSubview(subtree)
         }
     }
     return view
 }
 
-private func makeLayerSubtreeSnapshot(layer: CALayer) -> CALayer? {
+fileprivate func makeLayerSubtreeSnapshot(layer: CALayer) -> CALayer? {
     if layer is AVSampleBufferDisplayLayer {
         return nil
     }
@@ -535,14 +532,13 @@ private func makeLayerSubtreeSnapshot(layer: CALayer) -> CALayer? {
     if let sublayers = layer.sublayers {
         for sublayer in sublayers {
             let subtree = makeLayerSubtreeSnapshot(layer: sublayer)
-            if let subtree = subtree {
-                subtree.transform = sublayer.transform
-                subtree.frame = sublayer.frame
-                subtree.bounds = sublayer.bounds
-                layer.addSublayer(subtree)
-            } else {
+            guard let subtree = subtree else {
                 return nil
             }
+            subtree.transform = sublayer.transform
+            subtree.frame = sublayer.frame
+            subtree.bounds = sublayer.bounds
+            layer.addSublayer(subtree)
         }
     }
     return view

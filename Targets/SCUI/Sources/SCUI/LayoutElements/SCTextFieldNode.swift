@@ -263,11 +263,10 @@ open class SCTextFieldNode: SCActionNode, ASEditableTextNodeDelegate {
         let maxVerticalInsets = max(0, maxHeight - maxLineHeight)
 
         let verticalInset: CGFloat = {
-            if minVerticalInsets != .infinity, maxVerticalInsets != .infinity {
-                return max(minVerticalInsets, maxVerticalInsets) / 2
-            } else {
+            guard minVerticalInsets != .infinity, maxVerticalInsets != .infinity else {
                 return 12
             }
+            return max(minVerticalInsets, maxVerticalInsets) / 2
         }()
 
         return UIEdgeInsets(

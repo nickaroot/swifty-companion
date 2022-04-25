@@ -389,15 +389,13 @@ public final class SCSearchMainNode: SCMainNode {
     }
 
     var initialLayoutSpec: ASLayoutSpec {
-        LayoutSpec {
+        let ls = LayoutSpec {
             VStack {
-                HStack(spacing: 6, isConcurrent: true) {
-                    searchBarNode
-                        .preferredLayoutHeight(36)
-                        .flexGrow(1)
-                }
-                .padding(.vertical, 8)
-                .padding(.horizontal, 8)
+                searchBarNode
+                    .preferredLayoutSize(width: .fraction(1), height: 36)
+                    .flexGrow(1)
+                    .padding(.vertical, 8)
+                    .padding(.horizontal, 8)
 
                 VStack(
                     spacing: 32,
@@ -430,6 +428,10 @@ public final class SCSearchMainNode: SCMainNode {
             }
             .padding(.top, safeAreaInsets.top)
         }
+
+        print((ls as ASLayoutSpec).asciiArtString())
+
+        return ls
     }
 
     var recentLayoutSpec: ASLayoutSpec {

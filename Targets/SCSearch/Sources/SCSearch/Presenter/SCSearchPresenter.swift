@@ -167,13 +167,13 @@ public final class SCSearchPresenter<ViewInput: SCSearchComponent.ViewInput>: NS
                 return layoutState = .empty
             }
 
-            if searchBarIsFirstResponder && searchQueryIsBlank
-                || hasSearchResults || isSearchUsersShimmering
-            {
-                return layoutState = .search
-            } else {
+            guard
+                searchBarIsFirstResponder && searchQueryIsBlank
+                    || hasSearchResults || isSearchUsersShimmering
+            else {
                 return layoutState = .empty
             }
+            return layoutState = .search
         }
     }
 

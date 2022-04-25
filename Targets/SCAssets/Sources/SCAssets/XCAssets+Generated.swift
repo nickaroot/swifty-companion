@@ -2,11 +2,11 @@
 // Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
 #if os(macOS)
-import AppKit
+    import AppKit
 #elseif os(iOS)
-import UIKit
+    import UIKit
 #elseif os(tvOS) || os(watchOS)
-import UIKit
+    import UIKit
 #endif
 
 // Deprecated typealiases
@@ -56,9 +56,9 @@ public final class ColorAsset {
     public fileprivate(set) var name: String
 
     #if os(macOS)
-    public typealias Color = NSColor
+        public typealias Color = NSColor
     #elseif os(iOS) || os(tvOS) || os(watchOS)
-    public typealias Color = UIColor
+        public typealias Color = UIColor
     #endif
 
     @available(iOS 11.0, tvOS 11.0, watchOS 4.0, macOS 10.13, *)
@@ -70,14 +70,14 @@ public final class ColorAsset {
     }()
 
     #if os(iOS) || os(tvOS)
-    @available(iOS 11.0, tvOS 11.0, *)
-    public func color(compatibleWith traitCollection: UITraitCollection) -> Color {
-        let bundle = BundleToken.bundle
-        guard let color = Color(named: name, in: bundle, compatibleWith: traitCollection) else {
-            fatalError("Unable to load color asset named \(name).")
+        @available(iOS 11.0, tvOS 11.0, *)
+        public func color(compatibleWith traitCollection: UITraitCollection) -> Color {
+            let bundle = BundleToken.bundle
+            guard let color = Color(named: name, in: bundle, compatibleWith: traitCollection) else {
+                fatalError("Unable to load color asset named \(name).")
+            }
+            return color
         }
-        return color
-    }
     #endif
 
     fileprivate init(
@@ -94,11 +94,11 @@ extension ColorAsset.Color {
     ) {
         let bundle = BundleToken.bundle
         #if os(iOS) || os(tvOS)
-        self.init(named: asset.name, in: bundle, compatibleWith: nil)
+            self.init(named: asset.name, in: bundle, compatibleWith: nil)
         #elseif os(macOS)
-        self.init(named: NSColor.Name(asset.name), bundle: bundle)
+            self.init(named: NSColor.Name(asset.name), bundle: bundle)
         #elseif os(watchOS)
-        self.init(named: asset.name)
+            self.init(named: asset.name)
         #endif
     }
 }
@@ -107,21 +107,21 @@ public struct ImageAsset {
     public fileprivate(set) var name: String
 
     #if os(macOS)
-    public typealias Image = NSImage
+        public typealias Image = NSImage
     #elseif os(iOS) || os(tvOS) || os(watchOS)
-    public typealias Image = UIImage
+        public typealias Image = UIImage
     #endif
 
     @available(iOS 8.0, tvOS 9.0, watchOS 2.0, macOS 10.7, *)
     public var image: Image {
         let bundle = BundleToken.bundle
         #if os(iOS) || os(tvOS)
-        let image = Image(named: name, in: bundle, compatibleWith: nil)
+            let image = Image(named: name, in: bundle, compatibleWith: nil)
         #elseif os(macOS)
-        let name = NSImage.Name(self.name)
-        let image = (bundle == .main) ? NSImage(named: name) : bundle.image(forResource: name)
+            let name = NSImage.Name(self.name)
+            let image = (bundle == .main) ? NSImage(named: name) : bundle.image(forResource: name)
         #elseif os(watchOS)
-        let image = Image(named: name)
+            let image = Image(named: name)
         #endif
         guard let result = image else {
             fatalError("Unable to load image asset named \(name).")
@@ -130,14 +130,15 @@ public struct ImageAsset {
     }
 
     #if os(iOS) || os(tvOS)
-    @available(iOS 8.0, tvOS 9.0, *)
-    public func image(compatibleWith traitCollection: UITraitCollection) -> Image {
-        let bundle = BundleToken.bundle
-        guard let result = Image(named: name, in: bundle, compatibleWith: traitCollection) else {
-            fatalError("Unable to load image asset named \(name).")
+        @available(iOS 8.0, tvOS 9.0, *)
+        public func image(compatibleWith traitCollection: UITraitCollection) -> Image {
+            let bundle = BundleToken.bundle
+            guard let result = Image(named: name, in: bundle, compatibleWith: traitCollection)
+            else {
+                fatalError("Unable to load image asset named \(name).")
+            }
+            return result
         }
-        return result
-    }
     #endif
 }
 
@@ -152,23 +153,23 @@ extension ImageAsset.Image {
         asset: ImageAsset
     ) {
         #if os(iOS) || os(tvOS)
-        let bundle = BundleToken.bundle
-        self.init(named: asset.name, in: bundle, compatibleWith: nil)
+            let bundle = BundleToken.bundle
+            self.init(named: asset.name, in: bundle, compatibleWith: nil)
         #elseif os(macOS)
-        self.init(named: NSImage.Name(asset.name))
+            self.init(named: NSImage.Name(asset.name))
         #elseif os(watchOS)
-        self.init(named: asset.name)
+            self.init(named: asset.name)
         #endif
     }
 }
 
 // swiftlint:disable convenience_type
-private final class BundleToken {
+fileprivate final class BundleToken {
     static let bundle: Bundle = {
         #if SWIFT_PACKAGE
-        return Bundle.module
+            return Bundle.module
         #else
-        return Bundle(for: BundleToken.self)
+            return Bundle(for: BundleToken.self)
         #endif
     }()
 }

@@ -19,11 +19,10 @@ extension Decimal {
     public func description(with precision: Int, _ rule: FloatingPointRoundingRule? = nil) -> String
     {
         let doubleValue: Double = {
-            if let rule = rule {
-                return self.doubleValue.rounded(rule)
-            } else {
+            guard let rule = rule else {
                 return self.doubleValue
             }
+            return self.doubleValue.rounded(rule)
         }()
 
         return String(format: "%.\(precision)f", doubleValue)

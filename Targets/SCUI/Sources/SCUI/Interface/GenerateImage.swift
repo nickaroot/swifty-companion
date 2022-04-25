@@ -34,7 +34,7 @@ public let deviceColorSpace: CGColorSpace = {
     return colorSpace
 }()
 
-private let grayscaleColorSpace = CGColorSpaceCreateDeviceGray()
+fileprivate let grayscaleColorSpace = CGColorSpaceCreateDeviceGray()
 
 let deviceScale = UIScreen.main.scale
 
@@ -52,7 +52,8 @@ public func generateImagePixel(
     return context.generateImage()
 }
 
-private func withImageBytes(image: UIImage, _ f: (UnsafePointer<UInt8>, Int, Int, Int) -> Void) {
+fileprivate func withImageBytes(image: UIImage, _ f: (UnsafePointer<UInt8>, Int, Int, Int) -> Void)
+{
     let selectedScale = image.scale
     let scaledSize = CGSize(
         width: image.size.width * selectedScale,
@@ -666,7 +667,7 @@ public func generateScaledImage(
     )
 }
 
-private func generateSingleColorImage(size: CGSize, color: UIColor) -> UIImage? {
+fileprivate func generateSingleColorImage(size: CGSize, color: UIColor) -> UIImage? {
     return generateImage(
         size,
         contextGenerator: { size, context in

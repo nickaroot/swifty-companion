@@ -7,7 +7,7 @@
 
 import UIKit
 
-@objc private class CALayerAnimationDelegate: NSObject, CAAnimationDelegate {
+@objc fileprivate class CALayerAnimationDelegate: NSObject, CAAnimationDelegate {
     private let keyPath: String?
     var completion: ((Bool) -> Void)?
 
@@ -37,7 +37,7 @@ import UIKit
     }
 }
 
-private let completionKey = "CAAnimationUtils_completion"
+fileprivate let completionKey = "CAAnimationUtils_completion"
 
 public let kCAMediaTimingFunctionSpring = "CAAnimationUtilsSpringCurve"
 public let kCAMediaTimingFunctionCustomSpringPrefix = "CAAnimationUtilsSpringCustomCurve"
@@ -45,11 +45,10 @@ public let kCAMediaTimingFunctionCustomSpringPrefix = "CAAnimationUtilsSpringCus
 extension CAAnimation {
     public var completion: ((Bool) -> Void)? {
         get {
-            if let delegate = self.delegate as? CALayerAnimationDelegate {
-                return delegate.completion
-            } else {
+            guard let delegate = self.delegate as? CALayerAnimationDelegate else {
                 return nil
             }
+            return delegate.completion
         }
         set(value) {
             if let delegate = self.delegate as? CALayerAnimationDelegate {
@@ -249,14 +248,8 @@ extension CALayer {
         let animation = CAKeyframeAnimation(keyPath: keyPath)
         animation.values = values
         var keyTimes: [NSNumber] = []
-        for i in 0..<values.count {
-            if i == 0 {
-                keyTimes.append(0.0)
-            } else if i == values.count - 1 {
-                keyTimes.append(1.0)
-            } else {
-                keyTimes.append((Double(i) / Double(values.count - 1)) as NSNumber)
-            }
+        for i in 0..<values.count where i == 0 {
+            keyTimes.append(0.0)
         }
         animation.keyTimes = keyTimes
         animation.speed = speed

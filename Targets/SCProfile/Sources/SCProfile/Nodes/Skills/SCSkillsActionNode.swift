@@ -64,10 +64,9 @@ class SCSkillsActionNode: SCActionNode {
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         guard let supernode = supernode else { return nil }
 
-        if piePath.contains(point) {
-            return view
-        } else {
+        guard piePath.contains(point) else {
             return nil
         }
+        return view
     }
 }
