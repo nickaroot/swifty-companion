@@ -13,7 +13,7 @@ let dependencies = Dependencies(
         .remote(url: "https://github.com/SFSafeSymbols/SFSafeSymbols.git", requirement: .upToNextMajor(from: "2.1.3")),
         .remote(url: "https://github.com/SwiftKickMobile/SwiftMessages.git", requirement: .upToNextMajor(from: "9.0.6")),
         .remote(url: "https://github.com/marmelroy/PhoneNumberKit.git", requirement: .upToNextMajor(from: "3.3.4")),
-        .remote(url: "https://github.com/nickaroot/TextureUI.git", requirement: .branch("master")),
+        .remote(url: "https://github.com/nickaroot/TextureUI.git", requirement: .branch("main")),
         .local(path: "Targets/SCAPI"),
         .local(path: "Targets/SCAssets"),
         .local(path: "Targets/SCHelpers"),
