@@ -84,7 +84,7 @@ sub package_swift($) {
                     url: "https://github.com/uber/needle",
                     branch: "master"
                 ),
-                .package(url: "https://github.com/nickaroot/TextureUI.git", branch: "master"),
+                .package(url: "https://github.com/nickaroot/TextureUI.git", branch: "main"),
                 .package(name: "SCUI", path: "../SCUI"),
                 .package(name: "SCAPI", path: "../SCAPI"),
             ],
