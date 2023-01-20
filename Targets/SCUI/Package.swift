@@ -23,7 +23,7 @@ let package = Package(
             url: "https://github.com/SwiftKickMobile/SwiftMessages.git",
             .upToNextMajor(from: "9.0.6")
         ),
-        .package(url: "https://github.com/nickaroot/TextureUI.git", branch: "master"),
+        .package(url: "https://github.com/nickaroot/TextureUI.git", branch: "main"),
         .package(name: "SCHelpers", path: "../SCHelpers"),
         .package(name: "SCAssets", path: "../SCAssets"),
     ],
