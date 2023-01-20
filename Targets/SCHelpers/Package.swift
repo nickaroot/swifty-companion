@@ -15,7 +15,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/Alamofire/Alamofire.git", .upToNextMajor(from: "5.0.0")),
-        .package(url: "https://github.com/nickaroot/TextureUI.git", branch: "master"),
+        .package(url: "https://github.com/nickaroot/TextureUI.git", branch: "main"),
         .package(name: "UIKitRuntimeUtils", path: "../UIKitRuntimeUtils"),
         .package(name: "SCAssets", path: "../SCAssets"),
     ],
